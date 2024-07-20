@@ -1,4 +1,4 @@
-FROM node:18-alpine3.16 AS build
+FROM node:20.8.1-alpine3.18 AS build
 
 WORKDIR /dockerbuild
 COPY . .
@@ -7,7 +7,7 @@ RUN yarn install \
     && yarn build \
     && rm -rf /dockerbuild/lib/scripts
 
-FROM node:18-alpine3.16
+FROM node:20.8.1-alpine3.18
 
 # "localhost" doesn't mean much in a container, so we adjust our default to the common service name "mongo" instead
 # (and make sure the server listens outside the container, since "localhost" inside the container is usually difficult to access)
@@ -29,8 +29,8 @@ COPY --from=build /dockerbuild/.yarnrc.yml /opt/mongo-express/
 COPY --from=build /dockerbuild/.npmignore /opt/mongo-express/
 
 RUN apk -U add --no-cache \
-        bash=5.1.16-r2 \
-        tini=0.19.0-r0 \
+        bash=5.2.15-r5 \
+        tini=0.19.0-r1 \
     && yarn workspaces focus --production
 
 EXPOSE 8081
