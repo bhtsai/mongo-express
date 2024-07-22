@@ -124,6 +124,13 @@
     Delete all {{count}} documents retrieved
   </button>
 </form>
+{% elseif count != 0 %}
+<div>
+  <button type="button" disabled class="btn btn-danger btn-large btn-block">
+    <i class="fa fa-trash"></i>
+    Delete all {{count}} documents retrieved
+  </button>
+</div>
 {% endif %}
 <br />
 
