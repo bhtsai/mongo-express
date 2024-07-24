@@ -3,9 +3,12 @@
 {% block title %}{{ collectionName }}{% endblock %}
 
 {% block breadcrumb %}
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ dbUrl }}">Database:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarDatabaseDropdown" data-bs-target="#navbarDatabaseDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Database: {{ dbName }}
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ dbName }}
   </a>
   <ul id="navbarDatabaseDropdown" class="dropdown-menu">
     {% for db in databases %}
@@ -13,9 +16,12 @@
     {% endfor %}
   </ul>
 </li>
+<li class="nav-item">
+  <a class="nav-link px-1" href="{{ collectionUrl }}">Collection:</a>
+</li>
 <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" aria-controls="navbarCollectionDropdown" data-bs-target="#navbarCollectionDropdown" data-bs-toggle="collapse" aria-expanded="false">
-    Collection: {{ collectionName }}
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ collectionName }}
   </a>
   <ul id="navbarCollectionDropdown" class="dropdown-menu">
     {% for collection in collections %}
@@ -124,6 +130,13 @@
     Delete all {{count}} documents retrieved
   </button>
 </form>
+{% elseif count != 0 %}
+<div>
+  <button type="button" disabled class="btn btn-danger btn-large btn-block">
+    <i class="fa fa-trash"></i>
+    Delete all {{count}} documents retrieved
+  </button>
+</div>
 {% endif %}
 <br />
 
@@ -314,7 +327,7 @@
       </div>
 
       <div class="col-sm-4 p-2 d-grid ">
-        <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
+        <a href="{{ dbUrl }}/expCsv/{{ collectionName | url_encode }}?key={{ key }}&value={{ value }}&type={{ type }}&query={{ query | url_encode }}&projection= {{ projection | url_encode }}&runAggregate={{ runAggregate }}{% for k, v in sort %}&sort[{{ k }}]={{ v }}{% endfor %}"
           class="btn btn-warning btn-block text-white">
           <i class="fa fa-download d-block"></i>Export --csv
         </a>
