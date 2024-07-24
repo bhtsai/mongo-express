@@ -170,6 +170,7 @@ export default {
 
     // logger: this object will be used to initialize router logger (morgan)
     logger: {},
+    loggerFormat: process.env.ME_CONFIG_LOGGER_FORMAT || 'dev',
 
     // confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is
     // displayed before deleting a document/collection
