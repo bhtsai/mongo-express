@@ -43,11 +43,11 @@
             <i class="fa fa-eye d-block"></i>View
           </a>
         </div>
-        <div class="col-md-8 d-flex">
-          <h3 class="align-self-center m-0"><a href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3>
+        <div class="col-md-9 d-flex">
+          <h3 class="align-self-center m-0"><a class="text-decoration-none" href="{{ baseHref }}db/{{ db | url_encode }}/">{{ db }}</a></h3>
         </div>
         {% if !settings.read_only && !settings.no_delete %}
-        <div class="col-md-2 d-grid">
+        <div class="col-md-1 d-grid">
           <form method="POST" class="d-grid" action="{{ baseHref }}{{ db | url_encode }}">
             <input type="hidden" name="_csrf" value="{{ csrfToken }}">
             <input type="hidden" name="_method" value="delete">

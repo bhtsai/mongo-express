@@ -71,44 +71,42 @@
 {% endif %}
   <input type="hidden" name="_csrf" value="{{ csrfToken }}">
   {% if docLength > 10 %}
-    <div>
+    <div class="mb-1">
       {% if !settings.read_only %}
         <input type="hidden" name="_method" value="put">
-        <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+        <button onclick="return onBackClick()" class="backButton btn btn-secondary btn-large col-md-1">
          <i class="fa fa-arrow-left"></i>
           Back
         </button>
-        <button type="submit" class="btn btn-success btn-large float-end" onclick="return onSubmitClick()">
+        <button type="submit" class="btn btn-success btn-large float-end col-md-1" onclick="return onSubmitClick()">
           <i class="fa fa-save"></i>
           Save
         </button>
       {% else %}
-        <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+        <button onclick="return history.back()" class="btn btn-secondary btn-large btn-block col-md-1">
           <i class="fa fa-arrow-left"></i>
           Back
         </button>
       {% endif %}
     </div>
-  <br />
   {% endif %}
 
   <textarea class="col-md-12" id="document" name="document"{% if settings.read_only %} readonly="readonly"{% endif %}>{{ docString }}</textarea>
-  <br />
 
-  <div>
+  <div class="mt-1">
     {% if !settings.read_only %}
       <input type="hidden" name="_method" value="put">
-      <button onclick="return onBackClick()" class="backButton btn btn-warning btn-large">
+      <button onclick="return onBackClick()" class="backButton btn btn-secondary btn-large col-md-1">
         <i class="fa fa-arrow-left"></i>
         Back
       </button>
 
-      <button type="submit" class="btn btn-success btn-large float-end" onclick="return onSubmitClick()">
+      <button type="submit" class="btn btn-success btn-large float-end col-md-1" onclick="return onSubmitClick()">
         <i class="fa fa-save"></i>
         Save
       </button>
     {% else %}
-      <button onclick="return history.back()" class="btn btn-warning btn-large btn-block">
+      <button onclick="return history.back()" class="btn btn-secondary btn-large btn-block col-md-1">
         <i class="fa fa-arrow-left"></i>
         Back
       </button>
@@ -117,8 +115,6 @@
 </form>
 
 {% if !settings.read_only && !settings.no_delete %}
-  <br>
-
   {% if document._id._bsontype == 'Binary' %}
   <form method="POST" action="{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}">
   {% elseif document._id._bsontype == 'Long' %}
@@ -128,7 +124,7 @@
   {% endif %}
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
     <input type="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-danger deleteButtonDocument">
+    <button type="submit" class="btn btn-danger deleteButtonDocument col-md-1 mt-1">
       <i class="fa fa-trash"></i>
       Delete
     </button>

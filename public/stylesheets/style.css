@@ -52,3 +52,16 @@
   border-radius: 4px; /* future proofing */
   -khtml-border-radius: 4px; /* for old Konqueror browsers */
 }
+
+.dropdown-menu {
+  overflow-y: auto;
+  max-height: 90lvh;
+}
+
+.tab-content {
+  background-color: #eaeaea;
+}
+
+[data-bs-theme=dark] .tab-content {
+  background-color: #3c3f41;
+}
