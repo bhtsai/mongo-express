@@ -175,7 +175,7 @@ export default {
 
     // confirmDelete: if confirmDelete is set to 'true', a modal for confirming deletion is
     // displayed before deleting a document/collection
-    confirmDelete: false,
+    confirmDelete: getBoolean(process.env.ME_CONFIG_OPTIONS_CONFIRM_DELETE, false),
 
     // noExport: if noExport is set to true, we won't show export buttons
     noExport: false,
