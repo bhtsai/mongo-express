@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import https from 'node:https';
+import path from 'node:path';
 import pico from 'picocolors';
 import { program } from 'commander';
 import csrf from 'csurf';
@@ -10,7 +11,7 @@ import middleware from './lib/middleware.js';
 import { deepmerge } from './lib/utils.js';
 import configDefault from './config.default.js';
 
-const pkg = JSON.parse(fs.readFileSync('./package.json'));
+const pkg = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, './package.json')));
 
 const app = express();
 
@@ -63,10 +64,12 @@ async function bootstrap(config) {
         console.error(pico.red('Server is open to allow connections from anyone (0.0.0.0)'));
       }
 
-      if (config.useBasicAuth !== true) {
-        console.warn(pico.red('Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.'));
-      } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
-        console.error(pico.red('basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!'));
+      if (config.useOidcAuth !== true) {
+        if (config.useBasicAuth !== true) {
+          console.warn(pico.yellow('Basic and OIDC authentications are disabled, it\'s recommended to set the useBasicAuth to true in the config.js.'));
+        } else if (config.basicAuth.username === 'admin' && config.basicAuth.password === 'pass') {
+          console.warn(pico.yellow('basicAuth credentials are "admin:pass", it\'s recommended to set them in your config.js!'));
+        }
       }
     }
   })
