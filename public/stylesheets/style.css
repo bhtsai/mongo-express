@@ -57,3 +57,16 @@
   overflow-y: auto;
   max-height: 90vh;
 }
+
+.dropdown-menu {
+  overflow-y: auto;
+  max-height: 90lvh;
+}
+
+.tab-content {
+  background-color: #eaeaea;
+}
+
+[data-bs-theme=dark] .tab-content {
+  background-color: #3c3f41;
+}
