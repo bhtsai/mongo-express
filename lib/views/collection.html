@@ -23,12 +23,11 @@
   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     {{ collectionName }}
   </a>
-    <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
-      {% for collection in collections %}
-      <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
-      {% endfor %}
-    </ul>
-
+  <ul id="navbarCollectionDropdown" class="dropdown-menu scrollable-ul">
+    {% for collection in collections %}
+    <li><a class="dropdown-item" href="{{ dbUrl }}/{{ collection | url_encode }}">{{ collection }}</a></li>
+    {% endfor %}
+  </ul>
 </li>
 {% endblock %}
 
@@ -222,9 +221,11 @@
       <th class="sorting-button" data-column="{{column}}" data-direction="{{sort[column]}}" title="Sort by {{column}}">
         {{column}}
         {% if sort[column] == 1 %}
-        <i class="fas fa-sort-up"></i>
+        <i class="fas fa-sort-up sort-icon active"></i>
         {% elseif sort[column] == -1 %}
-        <i class="fas fa-sort-down"></i>
+        <i class="fas fa-sort-down sort-icon active"></i>
+        {% else %}
+        <i class="fas fa-sort sort-icon"></i>
         {% endif %}
       </th>
       {% endfor %}
@@ -232,13 +233,13 @@
     {% for index, document in docs %}
     {% if document._id._bsontype == 'Binary' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?subtype={{ document._id.sub_type }}&skip={{skip}}', event)">
       {% elseif document._id._bsontype == 'Long' %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | longToString | safe | url_encode }}?skip={{skip}}', event)">
       {% else %}
     <tr id="doc-{{ index }}"
-      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}')">
+      onclick="loadDocument('{{ collectionUrl }}/{{ document._id | json | safe | url_encode }}?skip={{skip}}', event)">
       {% endif %}
       {% for column in columns %}
       <td>
