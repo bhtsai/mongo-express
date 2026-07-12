@@ -78,6 +78,10 @@
          <i class="fa fa-arrow-left"></i>
           Back
         </button>
+        <button type="button" onclick="return onToggleJsonFoldClick()" class="btn btn-outline-primary btn-large col-md-2" id="toggleJsonFoldButton">
+          <i class="fa fa-compress"></i>
+          Collapse JSON
+        </button>
         <button type="submit" class="btn btn-success btn-large float-end col-md-1" onclick="return onSubmitClick()">
           <i class="fa fa-save"></i>
           Save
@@ -86,6 +90,10 @@
         <button type="button" onclick="return history.back()" class="btn btn-secondary btn-large btn-block col-md-1">
           <i class="fa fa-arrow-left"></i>
           Back
+        </button>
+        <button type="button" onclick="return onToggleJsonFoldClick()" class="btn btn-outline-primary btn-large col-md-2" id="toggleJsonFoldButton">
+          <i class="fa fa-compress"></i>
+          Collapse JSON
         </button>
       {% endif %}
     </div>
